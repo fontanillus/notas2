@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Promedio notas</title>
+  <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+
+  <style type="text/tailwindcss">
+    @import "tailwindcss"; 
+  
+    @layer base {
+      p, h1, h2, h3 {
+        @apply mb-2 leading-relaxed text-gray-700
+      }
+      h1, h2, h3 {
+        @apply mt-2 font-bold text-slate-500
+      }
+      input {
+        @apply rounded-sm border border-slate-300 text-slate-400 font-mono
+      }
+      input, label {
+        @apply inline-block flex-1 pl-4
+      }
+      button {
+        @apply rounded-md shadow-xs border-2 border-slate-400 px-4 py-1 my-1
+      }
+    }
+  </style>
+</head>
+
+<body class="min-h-screen bg-slate-100 px-4 py-8">
+
+  <div class="mx-auto w-full max-w-xl bg-white border border-slate-200 shadow-lg rounded-xl sm:p-8">
+
+    <form class="space-y-4 text-center">
+
+      <h1 class="text-2xl font-bold text-slate-700 sm:text-3xl">Promedio Notas</h1>
+
+      <p class="text-sm leading-relaxed text-slate-700 sm:text-base">
+        <span class="font-semibold">Introduzca sus notas de cada asignatura para poder calcular la nota promedio.</span>
+      </p>
+
+      <p>
+        <label for="flex" class="mx-auto block w-full max-w-md text-left text-slate-700">
+          Nota Flex:
+          <input type="number" id="flex" min="1" max="10" required
+            class="mt-1 w-full rounded-md border border-slate-300 px-3 py-2 text-slate-700 outline-none transition focus:border-slate-500 focus:ring-2 focus:ring-slate-200">
+        </label>
+      </p>
+
+      <p>
+        <label for="grid" class="mx-auto block w-full max-w-md text-left text-slate-700">
+          Nota Grid:
+          <input type="number" id="grid" min="1" max="10" required
+            class="mt-1 w-full rounded-md border border-slate-300 px-3 py-2 text-slate-700 outline-none transition focus:border-slate-500 focus:ring-2 focus:ring-slate-200">
+        </label>
+      </p>
+
+      <p>
+        <label for="java" class="mx-auto block w-full max-w-md text-left text-slate-700">
+          Nota Java Script:
+          <input type="number" id="java" min="1" max="10" required
+            class="mt-1 w-full rounded-md border border-slate-300 px-3 py-2 text-slate-700 outline-none transition focus:border-slate-500 focus:ring-2 focus:ring-slate-200">
+        </label>
+      </p>
+
+      <p>
+        <button type="button" onclick="calcular()"
+          class="inline-flex items-center justify-center rounded-md border-2 border-slate-500 bg-blue-900 px-5 py-2 font-semibold text-white transition-colors hover:bg-blue-800 active:bg-blue-950 active:scale-[0.99]">
+          Total nota promedio
+        </button>
+      </p>
+
+      <p id="totalNotaPromedia" class="text-lg font-bold text-slate-800 mt-2"></p>
+
+      <img src="img/OIP-removebg-preview (5).png" alt="foto" class="mx-auto w-32 sm:w-40 md:w-48">
+
+    </form>
+  </div>
+
+  <script>
+    const FLEX = document.getElementById("flex");
+    const GRID = document.getElementById("grid");
+    const JAVA = document.getElementById("java");
+    const RESULTADO = document.getElementById("totalNotaPromedia");
+
+    function calcular() {
+
+      if (!FLEX.value || !GRID.value || !JAVA.value) {
+        RESULTADO.textContent = "Por favor rellena todas las notas";
+        console.warn("Faltan valores en los inputs");
+        return;
+      }
+
+      let notasFlex = Number(FLEX.value);
+      let notasGrid = Number(GRID.value);
+      let notasJava = Number(JAVA.value);
+
+      let total = (notasFlex + notasGrid + notasJava) / 3;
+
+      // 👇 Logs útiles (esto sí tiene sentido)
+      console.log("=== DATOS INTRODUCIDOS ===");
+      console.log("Flex:", notasFlex);
+      console.log("Grid:", notasGrid);
+      console.log("JavaScript:", notasJava);
+
+      console.log("=== RESULTADO ===");
+      console.log("Promedio:", total);
+
+      RESULTADO.textContent = "Tu nota promedio es: " + total.toFixed(2);
+    }
+  </script>
+
+</body>
+
+</html>
